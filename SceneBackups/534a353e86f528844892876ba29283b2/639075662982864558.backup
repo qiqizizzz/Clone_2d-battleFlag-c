@@ -267,7 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f5c3b901ea4c4384735b95f742e79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseTxt: {fileID: 2800000, guid: 54db11ee83df36f42b083c5955e7c9e3, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
