@@ -7,6 +7,9 @@
 */
 
 using System;
+using Module.Game;
+using Module.GameUI;
+using MVC;
 using UnityEngine;
 
 public class GameScene : MonoBehaviour
@@ -23,11 +26,27 @@ public class GameScene : MonoBehaviour
     {
         Cursor.SetCursor(mouseTxt, Vector2.zero, CursorMode.Auto);//Auto->自动选择渲染模式
         GameApp.SoundManager.PlayBGM("login");
+        
+        RegisterModule();//注册游戏中的控制器
+        InitModule();
     }
 
     private void Update()
     {
         dt = Time.deltaTime;
         GameApp.Instance.Update(dt);
+    }
+    
+    //注册控制器
+    private void RegisterModule()
+    {
+        GameApp.ControllerManager.Register(ControllerType.GameUI, new GameUIController());
+        GameApp.ControllerManager.Register(ControllerType.Game, new GameController());
+    }
+
+    //执行所有控制器初始化
+    private void InitModule()
+    {
+        GameApp.ControllerManager.InitAllModules();
     }
 }

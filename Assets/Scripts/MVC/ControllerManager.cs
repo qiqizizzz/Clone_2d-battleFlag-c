@@ -30,7 +30,20 @@ namespace MVC
                 _modules.Add(controllerKey, ctl);
             }
         }
+        public void Register(ControllerType type, BaseController ctl)
+        {
+            Register((int)type,ctl);
+        }
 
+        //执行所有控制器的Init函数
+        public void InitAllModules()
+        {
+            foreach (var item in _modules)
+            {
+                item.Value.Init();
+            }
+        }
+        
         //移除控制器
         public void UnRegister(int controllerKey)
         {

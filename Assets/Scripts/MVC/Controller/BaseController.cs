@@ -25,6 +25,12 @@ namespace MVC.Controller
             message = new Dictionary<string, Action<object[]>>();
         }
 
+        //注册后调用的初始化函数(要所有控制器初始化后执行)
+        public virtual void Init()
+        {
+            
+        }
+
         //加载视图
         public virtual void OnLoadView(IBaseView view)
         {
@@ -38,7 +44,7 @@ namespace MVC.Controller
         }
         
         //关闭视图
-        public virtual void CloseView()
+        public virtual void CloseView(IBaseView view)
         {
             
         }
@@ -82,6 +88,10 @@ namespace MVC.Controller
         public void ApplyControllerFunc(int controllerKey, string eventName, params object[] args)
         {
             GameApp.ControllerManager.ApplyFunc(controllerKey, eventName, args);
+        }
+        public void ApplyControllerFunc(ControllerType type, string eventName, params object[] args)
+        {
+            ApplyControllerFunc((int)type, eventName, args);
         }
 
         //设置模型数据
