@@ -12,6 +12,6 @@ namespace Common
     {
         //控制器相关的事件字符串
         public static readonly string OpenStartView = "OpenStartView";//打开开始面板
-        
+        public static readonly string OpenSetView = "OpenSetView";//打开设置面板
     }
 }

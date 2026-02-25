@@ -10,6 +10,7 @@ namespace MVC
 {
     public enum ViewType
     {
-        StartView
+        StartView,
+        SetView
     }
 }

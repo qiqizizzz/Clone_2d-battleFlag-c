@@ -71,7 +71,7 @@ namespace MVC.Controller
             }
         }
 
-        //触发本模块事件
+        //触发本模版事件
         public void ApplyFunc(string eventName, params object[] args)
         {
             if (message.ContainsKey(eventName))

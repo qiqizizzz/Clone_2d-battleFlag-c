@@ -23,6 +23,14 @@ namespace Module.GameUI
                 controller = this,
                 parentTf = GameApp.ViewManager.canvasTf
             });
+            //设置面板
+            GameApp.ViewManager.Register(ViewType.SetView, new ViewInfo()
+            {
+                PrefabName = "SetView",
+                controller = this,
+                parentTf = GameApp.ViewManager.canvasTf
+            });
+            
             
             //初始化事件
             InitModuleEvent();
@@ -32,12 +40,19 @@ namespace Module.GameUI
         public override void InitModuleEvent()
         {
             RegisterFunc(Defines.OpenStartView, openStartView);//注册打开开始面板
+            RegisterFunc(Defines.OpenSetView, openSetView);
         }
         
         //测试模版注册事件 例子
         private void openStartView(System.Object[] args)
         {
             GameApp.ViewManager.Open(ViewType.StartView, args);
+        }
+
+        //打开设置面板
+        private void openSetView(System.Object[] args)
+        {
+            GameApp.ViewManager.Open(ViewType.SetView, args);
         }
     }
 }

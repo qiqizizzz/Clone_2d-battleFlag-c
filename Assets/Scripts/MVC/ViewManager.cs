@@ -168,11 +168,12 @@ namespace MVC
                 }
                 canvas.overrideSorting = true;//可以设置层级
                 
-                /*if (viewType == null)
-                {
-                    Debug.LogError($"[ViewManager] 无法找到名为 '{type}' 的视图脚本，请检查 ViewType 枚举和脚本名称是否一致，以及脚本是否能被正确编译！");
-                    return;
-                }*/
+                /* 另一种解决方案：
+                 * string typeName = $"Module.{type.ToString()}";
+                 * Type scriptType = Type.GetType(typeName);
+                 * view = uiObj.AddComponent(viewType) as IBaseView;
+                 * 简单来说就是需要加入命名空间 Module才能查找到对应的脚本
+                 */
                 
                 Type viewType = FindType(type); // 使用新方法查找类型
                 view = uiObj.AddComponent(viewType) as IBaseView;//添加对应View脚本
