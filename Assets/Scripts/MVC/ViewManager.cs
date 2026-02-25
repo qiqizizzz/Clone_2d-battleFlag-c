@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MVC.Controller;
 using MVC.View;
 using UnityEngine;
@@ -167,7 +168,14 @@ namespace MVC
                 }
                 canvas.overrideSorting = true;//可以设置层级
                 
-                view = uiObj.AddComponent(Type.GetType(type)) as IBaseView;//添加对应View脚本
+                /*if (viewType == null)
+                {
+                    Debug.LogError($"[ViewManager] 无法找到名为 '{type}' 的视图脚本，请检查 ViewType 枚举和脚本名称是否一致，以及脚本是否能被正确编译！");
+                    return;
+                }*/
+                
+                Type viewType = FindType(type); // 使用新方法查找类型
+                view = uiObj.AddComponent(viewType) as IBaseView;//添加对应View脚本
                 view.ViewId = key;//设置视图id
                 view.Controller = viewInfo.controller;//设置控制器
                 
@@ -198,6 +206,14 @@ namespace MVC
         public void Open(ViewType viewType, params object[] args)
         {
             Open((int)viewType, args);
+        }
+        
+        //查找对应类型的脚本
+        private Type FindType(string typeName)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies() //获取当前应用程序域中所有已加载的程序集
+                .SelectMany(assembly => assembly.GetTypes()) //将获取的所有类型扁平化为一个序列
+                .FirstOrDefault(type => type.Name == typeName); //寻找匹配名称的第一个类型脚本
         }
     }
 

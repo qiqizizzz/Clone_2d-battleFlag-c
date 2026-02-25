@@ -51,7 +51,7 @@ namespace MVC.View
 
         public void InitUI()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void InitData()
