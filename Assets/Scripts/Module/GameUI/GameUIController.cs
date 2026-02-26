@@ -16,6 +16,7 @@ namespace Module.GameUI
     {
         public GameUIController() : base()
         {
+            #region 注册视图
             //开始游戏视图
             GameApp.ViewManager.Register(ViewType.StartView, new ViewInfo()
             {
@@ -28,9 +29,19 @@ namespace Module.GameUI
             {
                 PrefabName = "SetView",
                 controller = this,
+                Sorting_Order = 1,//设置面板显示在开始面板上一层
+                parentTf = GameApp.ViewManager.canvasTf
+            });
+            //提示面板
+            GameApp.ViewManager.Register(ViewType.MessageView, new ViewInfo()
+            {
+                PrefabName = "MessageView",
+                controller = this,
+                Sorting_Order = 999,
                 parentTf = GameApp.ViewManager.canvasTf
             });
             
+            #endregion
             
             //初始化事件
             InitModuleEvent();
@@ -41,6 +52,7 @@ namespace Module.GameUI
         {
             RegisterFunc(Defines.OpenStartView, openStartView);//注册打开开始面板
             RegisterFunc(Defines.OpenSetView, openSetView);
+            RegisterFunc(Defines.OpenMessageView, openMessageView);
         }
         
         //测试模版注册事件 例子
@@ -53,6 +65,12 @@ namespace Module.GameUI
         private void openSetView(System.Object[] args)
         {
             GameApp.ViewManager.Open(ViewType.SetView, args);
+        }
+        
+        //打开提示面板
+        private void openMessageView(System.Object[] args)
+        {
+            GameApp.ViewManager.Open(ViewType.MessageView, args);
         }
     }
 }

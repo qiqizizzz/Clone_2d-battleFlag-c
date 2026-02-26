@@ -1,17 +1,17 @@
 ﻿/*
 * ┌──────────────────────────────────┐
-* │  描    述: 控制器类型
-* │  类    名: ControllerType.cs
+* │  描    述: 加载界面                      
+* │  类    名: LoadingView.cs       
 * │  创    建: By qiqizizzz
 * └──────────────────────────────────┘
 */
 
-namespace MVC
+using MVC.View;
+
+namespace Module.Loading
 {
-    public enum ControllerType
+    public class LoadingView : BaseView
     {
-        GameUI,
-        Game,
-        Loading
+        
     }
 }

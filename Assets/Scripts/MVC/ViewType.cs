@@ -11,6 +11,8 @@ namespace MVC
     public enum ViewType
     {
         StartView,
-        SetView
+        SetView,
+        MessageView,
+        LoadingView
     }
 }

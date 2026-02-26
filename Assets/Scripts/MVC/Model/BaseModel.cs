@@ -19,6 +19,11 @@ namespace MVC.Model
             this.controller = ctl;
         }
 
+        public BaseModel()
+        {
+            
+        }
+        
         public virtual void Init()
         {
             

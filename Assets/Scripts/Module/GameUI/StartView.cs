@@ -7,7 +7,10 @@
 */
 
 using Common;
+using Module.Loading;
+using MVC;
 using MVC.View;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Module.GameUI
@@ -27,7 +30,12 @@ namespace Module.GameUI
         //开始游戏
         private void onStartGameBtn()
         {
+            //关闭开始界面
+            GameApp.ViewManager.Close(ViewId);
             
+            LoadingModel loadingModel = new LoadingModel();
+            loadingModel.SceneName = "map";
+            Controller.ApplyControllerFunc(ControllerType.Loading, Defines.LoadingScene, loadingModel);
         }
         
         //打开设置面板
@@ -39,7 +47,14 @@ namespace Module.GameUI
         //退出游戏
         private void onQuitGameBtn()
         {
-            
+            Controller.ApplyControllerFunc(ControllerType.GameUI, Defines.OpenMessageView, new MessageInfo()
+            {
+                okCallback = delegate()
+                {
+                    Application.Quit();//退出游戏
+                },
+                MsgTxt = "确认退出游戏吗?"
+            });
         }
     }
 }

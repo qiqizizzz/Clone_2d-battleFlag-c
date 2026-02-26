@@ -17,15 +17,55 @@ namespace Sound
 
         private Dictionary<string, AudioClip> clips;//音频缓存字典
 
+        private bool isStop;//是否静音
+        private float bgmVolume;//bgm音量
+        private float effectVolume;//音效音量(攻击、受击等)
+        
+        public bool IsStop
+        {
+            get { return isStop; }
+            set
+            {
+                isStop = value;
+                if(isStop) bgmSource.Pause();
+                else 
+                    if(!bgmSource.isPlaying) bgmSource.Play();
+            }
+        }
+
+        public float BgmVolume
+        {
+            get { return bgmVolume; }
+            set
+            {
+                bgmVolume = value;
+                bgmSource.volume = bgmVolume;
+            }
+        }
+
+        public float EffectVolume
+        {
+            get { return effectVolume; }
+            set
+            {
+                effectVolume = value;
+            }
+        }
+        
         public SoundManager()
         {
             clips = new Dictionary<string, AudioClip>();
             bgmSource = GameObject.Find("game").GetComponent<AudioSource>();
+            IsStop = false;
+            BgmVolume = 1f;
+            EffectVolume = 1f;
         }
 
         //播放bgm
         public void PlayBGM(string res)
         {
+            if(isStop) return;
+            
             if (clips.ContainsKey(res) == false)
             {
                 AudioClip clip = Resources.Load<AudioClip>($"Sounds/{res}");//加载音频

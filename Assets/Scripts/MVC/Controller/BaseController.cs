@@ -98,6 +98,7 @@ namespace MVC.Controller
         public void SetModel(BaseModel model)
         {
             this.model = model;
+            this.model.controller = this;
         }
 
         public BaseModel GetModel() => model;

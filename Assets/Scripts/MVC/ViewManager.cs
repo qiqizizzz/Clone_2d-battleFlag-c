@@ -21,9 +21,10 @@ namespace MVC
     /// </summary>
     public class ViewInfo
     {
-        public string PrefabName;
-        public Transform parentTf;
-        public BaseController controller;
+        public string PrefabName;//视图预制体名称
+        public Transform parentTf;//所在父级
+        public BaseController controller;//视图所属控制器
+        public int Sorting_Order;//显示层级,改变显示顺序
     }
     
     public class ViewManager
@@ -167,6 +168,7 @@ namespace MVC
                     uiObj.AddComponent<GraphicRaycaster>();
                 }
                 canvas.overrideSorting = true;//可以设置层级
+                canvas.sortingOrder = viewInfo.Sorting_Order;//设置层级
                 
                 /* 另一种解决方案：
                  * string typeName = $"Module.{type.ToString()}";
