@@ -7,6 +7,7 @@
 */
 
 using Common;
+using Config;
 using MVC;
 using Sound;
 
@@ -15,11 +16,13 @@ public class GameApp : Singleton<GameApp>
     public static SoundManager SoundManager;//音频管理器
     public static ControllerManager ControllerManager;//控制器管理器
     public static ViewManager ViewManager;//视图管理器
+    public static ConfigManager ConfigManager;//配置表
     
     public override void Init()
     {
         SoundManager = new SoundManager();
         ControllerManager = new ControllerManager();
         ViewManager = new ViewManager();
+        ConfigManager = new ConfigManager();
     }
 }
