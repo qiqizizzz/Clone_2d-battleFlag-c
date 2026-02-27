@@ -8,6 +8,7 @@
 
 using System;
 using Config;
+using Module.Fight;
 using Module.Game;
 using Module.GameUI;
 using Module.Level;
@@ -63,6 +64,7 @@ public class GameScene : MonoBehaviour
         GameApp.ControllerManager.Register(ControllerType.Game, new GameController());
         GameApp.ControllerManager.Register(ControllerType.Loading, new LoadingController());
         GameApp.ControllerManager.Register(ControllerType.Level, new LevelController());
+        GameApp.ControllerManager.Register(ControllerType.Fight, new FightController());
     }
 
     //执行所有控制器初始化

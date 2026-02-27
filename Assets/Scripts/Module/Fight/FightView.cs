@@ -1,19 +1,17 @@
 ﻿/*
 * ┌──────────────────────────────────┐
-* │  描    述: 控制器类型
-* │  类    名: ControllerType.cs
+* │  描    述: 战斗基本面板                      
+* │  类    名: FightView.cs       
 * │  创    建: By qiqizizzz
 * └──────────────────────────────────┘
 */
 
-namespace MVC
+using MVC.View;
+
+namespace Module.Fight
 {
-    public enum ControllerType
+    public class FightView : BaseView
     {
-        GameUI,
-        Game,
-        Loading,
-        Level,
-        Fight
+        
     }
 }

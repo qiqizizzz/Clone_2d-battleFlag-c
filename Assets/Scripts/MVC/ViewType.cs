@@ -14,6 +14,8 @@ namespace MVC
         SetView,
         MessageView,
         LoadingView,
-        SelectLevelView
+        SelectLevelView,
+        FightView,
+        FightSelectHeroView
     }
 }

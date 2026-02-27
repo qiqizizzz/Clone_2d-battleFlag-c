@@ -68,7 +68,7 @@ namespace Module.Level
             loadingModel.callback = delegate()
             {
                 //打开选择关卡界面
-                //Controller.ApplyControllerFunc(ControllerType.Level, Defines.OpenSelectLevelView);
+                Controller.ApplyControllerFunc(ControllerType.Fight, Defines.BeginFight);
             };
             Controller.ApplyControllerFunc(ControllerType.Loading, Defines.LoadingScene, loadingModel);
         }
