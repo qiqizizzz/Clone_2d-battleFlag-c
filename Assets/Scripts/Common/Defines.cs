@@ -16,5 +16,9 @@ namespace Common
         public static readonly string OpenMessageView = "OpenMessageView";//打开提示面板
         public static readonly string LoadingScene = "LoadingScene";//加载场景
         public static readonly string OpenSelectLevelView = "OpenSelectLevelView";//打开选择关卡界面
+        
+        //全局事件相关
+        public static readonly string ShowLevelDesEvent = "ShowLevelDesEvent";//显示关卡详情事件
+        public static readonly string HideLevelDesEvent = "HideLevelDesEvent";//隐藏关卡详情事件
     }
 }

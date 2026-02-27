@@ -16,6 +16,8 @@ namespace Module.Level
     {
         public LevelController() : base()
         {
+            SetModel(new LevelModel());//设置数据模型
+            
             GameApp.ViewManager.Register(ViewType.SelectLevelView, new ViewInfo()
             {
                 PrefabName = "SelectLevelView",
@@ -24,11 +26,44 @@ namespace Module.Level
             });
             
             InitModuleEvent();
+            InitGlobalEvent();
+        }
+
+        public override void Init()
+        {
+            model.Init();//初始化数据
         }
 
         public override void InitModuleEvent()
         {
             RegisterFunc(Defines.OpenSelectLevelView, onOpenSelectLevelView);
+        }
+
+        //注册全局事件
+        public override void InitGlobalEvent()
+        {
+            GameApp.MsgCenter.AddEvent(Defines.ShowLevelDesEvent, onShowLevelDesCallback);
+            GameApp.MsgCenter.AddEvent(Defines.HideLevelDesEvent, onHideLevelDesCallback);
+        }
+
+        //移除全局事件
+        public override void RemoveGlobalEvent()
+        {
+            GameApp.MsgCenter.RemoveEvent(Defines.ShowLevelDesEvent, onShowLevelDesCallback);
+            GameApp.MsgCenter.RemoveEvent(Defines.HideLevelDesEvent, onHideLevelDesCallback);
+        }
+
+        private void onShowLevelDesCallback(System.Object arg)
+        {
+            LevelModel levelModel = GetModel<LevelModel>();
+            levelModel.current = levelModel.GetLevel(int.Parse(arg.ToString()));
+            
+            GameApp.ViewManager.GetView<SelectLevelView>((int)ViewType.SelectLevelView).ShowLevelDes();
+        }
+        
+        private void onHideLevelDesCallback(System.Object arg)
+        {
+            GameApp.ViewManager.GetView<SelectLevelView>((int)ViewType.SelectLevelView).HideLevelDes();
         }
 
         private void onOpenSelectLevelView(System.Object[] args)

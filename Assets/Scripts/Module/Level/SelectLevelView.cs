@@ -37,5 +37,20 @@ namespace Module.Level
             };
             Controller.ApplyControllerFunc(ControllerType.Loading, Defines.LoadingScene, loadingModel);
         }
+
+        //显示关卡详情面板
+        public void ShowLevelDes()
+        {
+            Find("level").SetActive(true);
+            LevelData current = Controller.GetModel<LevelModel>().current;
+            Find<Text>("level/name/txt").text = current.Name;
+            Find<Text>("level/des/txt").text = current.Des;
+        }
+
+        //隐藏关卡详情面板
+        public void HideLevelDes()
+        {
+            Find("level").SetActive(false);
+        }
     }
 }
