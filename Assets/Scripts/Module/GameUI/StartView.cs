@@ -30,7 +30,7 @@ namespace Module.GameUI
         //开始游戏
         private void onStartGameBtn()
         {
-            //关闭开始界面
+            //关闭当前界面
             GameApp.ViewManager.Close(ViewId);
             
             LoadingModel loadingModel = new LoadingModel();

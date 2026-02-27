@@ -10,6 +10,7 @@ using Common;
 using Module.Loading;
 using MVC;
 using MVC.View;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Module.Level
@@ -20,6 +21,7 @@ namespace Module.Level
         {
             base.OnStart();
             Find<Button>("close").onClick.AddListener(onCloseBtn);
+            Find<Button>("level/fightBtn").onClick.AddListener(onFightBtn);
         }
 
         //返回开始界面
@@ -51,6 +53,24 @@ namespace Module.Level
         public void HideLevelDes()
         {
             Find("level").SetActive(false);
+        }
+
+        //切换到战斗场景
+        private void onFightBtn()
+        {
+            //关闭当前界面
+            GameApp.ViewManager.Close(ViewId);
+            //摄像机重置位置
+            GameApp.CameraManager.ResetPos();
+            
+            LoadingModel loadingModel = new LoadingModel();
+            loadingModel.SceneName = Controller.GetModel<LevelModel>().current.SceneName;
+            loadingModel.callback = delegate()
+            {
+                //打开选择关卡界面
+                //Controller.ApplyControllerFunc(ControllerType.Level, Defines.OpenSelectLevelView);
+            };
+            Controller.ApplyControllerFunc(ControllerType.Loading, Defines.LoadingScene, loadingModel);
         }
     }
 }
