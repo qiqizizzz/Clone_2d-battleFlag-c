@@ -56,8 +56,12 @@ namespace Module.Loading
         {
             asyncOp.completed -= onLoadedEndCallBack;//进入函数后取消订阅
             
-            GetModel<LoadingModel>().callback?.Invoke();//执行回调
-            GameApp.ViewManager.Close((int)ViewType.LoadingView);//关闭加载界面
+            //延迟回调
+            GameApp.TimerManager.Register(0.25f, delegate()
+            {
+                GetModel<LoadingModel>().callback?.Invoke();//执行回调
+                GameApp.ViewManager.Close((int)ViewType.LoadingView);//关闭加载界面
+            });
         }
     }
     

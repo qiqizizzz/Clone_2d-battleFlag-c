@@ -10,6 +10,7 @@ using Common;
 using Config;
 using MVC;
 using Sound;
+using Timer;
 
 public class GameApp : Singleton<GameApp>
 {
@@ -19,6 +20,7 @@ public class GameApp : Singleton<GameApp>
     public static ConfigManager ConfigManager;//配置表
     public static CameraManager CameraManager;//摄像机
     public static MessageCenter MsgCenter;//消息监听
+    public static TimerManager TimerManager;//时间计时器
     
     public override void Init()
     {
@@ -28,5 +30,11 @@ public class GameApp : Singleton<GameApp>
         ConfigManager = new ConfigManager();
         CameraManager = new CameraManager();
         MsgCenter = new MessageCenter();
+        TimerManager = new TimerManager();
+    }
+
+    public override void Update(float dt)
+    {
+        TimerManager.OnUpdate(dt);
     }
 }
