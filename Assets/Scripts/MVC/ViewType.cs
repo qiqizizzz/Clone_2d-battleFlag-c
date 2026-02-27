@@ -13,6 +13,7 @@ namespace MVC
         StartView,
         SetView,
         MessageView,
-        LoadingView
+        LoadingView,
+        SelectLevelView
     }
 }

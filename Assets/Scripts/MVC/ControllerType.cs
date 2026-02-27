@@ -12,6 +12,7 @@ namespace MVC
     {
         GameUI,
         Game,
-        Loading
+        Loading,
+        Level
     }
 }

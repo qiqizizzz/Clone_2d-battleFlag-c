@@ -17,6 +17,8 @@ public class GameApp : Singleton<GameApp>
     public static ControllerManager ControllerManager;//控制器管理器
     public static ViewManager ViewManager;//视图管理器
     public static ConfigManager ConfigManager;//配置表
+    public static CameraManager CameraManager;//摄像机
+    public static MessageCenter MsgCenter;//消息监听
     
     public override void Init()
     {
@@ -24,5 +26,7 @@ public class GameApp : Singleton<GameApp>
         ControllerManager = new ControllerManager();
         ViewManager = new ViewManager();
         ConfigManager = new ConfigManager();
+        CameraManager = new CameraManager();
+        MsgCenter = new MessageCenter();
     }
 }

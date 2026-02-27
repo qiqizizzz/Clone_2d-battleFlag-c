@@ -15,5 +15,6 @@ namespace Common
         public static readonly string OpenSetView = "OpenSetView";//打开设置面板
         public static readonly string OpenMessageView = "OpenMessageView";//打开提示面板
         public static readonly string LoadingScene = "LoadingScene";//加载场景
+        public static readonly string OpenSelectLevelView = "OpenSelectLevelView";//打开选择关卡界面
     }
 }
