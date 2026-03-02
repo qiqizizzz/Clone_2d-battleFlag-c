@@ -8,6 +8,7 @@
 
 using Common;
 using Config;
+using Module.Fight.FightMgr;
 using MVC;
 using Sound;
 using Timer;
@@ -21,6 +22,8 @@ public class GameApp : Singleton<GameApp>
     public static CameraManager CameraManager;//摄像机
     public static MessageCenter MsgCenter;//消息监听
     public static TimerManager TimerManager;//时间计时器
+    public static FightWorldManager FightManager;//战斗管理器
+    public static MapManager MapManager;//地图管理器
     
     public override void Init()
     {
@@ -31,10 +34,13 @@ public class GameApp : Singleton<GameApp>
         CameraManager = new CameraManager();
         MsgCenter = new MessageCenter();
         TimerManager = new TimerManager();
+        FightManager = new FightWorldManager();
+        MapManager = new MapManager();
     }
 
     public override void Update(float dt)
     {
         TimerManager.OnUpdate(dt);
+        FightManager.Update(dt);
     }
 }

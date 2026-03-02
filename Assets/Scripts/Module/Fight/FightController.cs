@@ -7,6 +7,7 @@
 */
 
 using Common;
+using Module.Fight.FightMgr;
 using MVC;
 using MVC.Controller;
 
@@ -41,6 +42,9 @@ namespace Module.Fight
 
         private void onBeginFightCallback(System.Object[] args)
         {
+            //进入战斗
+            GameApp.FightManager.ChangeState(GameState.Enter);
+            
             GameApp.ViewManager.Open(ViewType.FightView);
             GameApp.ViewManager.Open(ViewType.FightSelectHeroView);
         }
