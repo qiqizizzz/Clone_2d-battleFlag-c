@@ -25,6 +25,7 @@ public class GameApp : Singleton<GameApp>
     public static FightWorldManager FightManager;//战斗管理器
     public static MapManager MapManager;//地图管理器
     public static GameDataManager GameDataManager;//游戏数据管理器
+    public static UserInputManager UserInputManager;//用户输入管理器
     
     public override void Init()
     {
@@ -38,10 +39,12 @@ public class GameApp : Singleton<GameApp>
         FightManager = new FightWorldManager();
         MapManager = new MapManager();
         GameDataManager = new GameDataManager();
+        UserInputManager = new UserInputManager();
     }
 
     public override void Update(float dt)
     {
+        UserInputManager.Update();
         TimerManager.OnUpdate(dt);
         FightManager.Update(dt);
     }

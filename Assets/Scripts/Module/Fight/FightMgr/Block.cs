@@ -7,6 +7,7 @@
 */
 
 using System;
+using Common;
 using UnityEngine;
 
 namespace Module.Fight.FightMgr
@@ -33,8 +34,20 @@ namespace Module.Fight.FightMgr
             selectSp = transform.Find("select").GetComponent<SpriteRenderer>();
             gridSp = transform.Find("grid").GetComponent<SpriteRenderer>();
             dirSp = transform.Find("dir").GetComponent<SpriteRenderer>();
+
+            GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnSelectCallback);
         }
 
+        protected void OnDestroy()
+        {
+            GameApp.MsgCenter.RemoveEvent(gameObject, Defines.OnSelectEvent, OnSelectCallback);
+        }
+
+        private void OnSelectCallback(System.Object arg)
+        {
+            GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+        }
+        
         private void OnMouseEnter()
         {
             selectSp.enabled = true;

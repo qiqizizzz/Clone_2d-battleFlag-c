@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using Common;
+using Module.Fight.FightMgr;
 using MVC;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -40,6 +41,20 @@ namespace Module.Fight.Components
         public void OnEndDrag(PointerEventData eventData)
         {
             GameApp.ViewManager.Close((int)ViewType.DragHeroView);
+            //检测拖拽后的位置是否有block脚本
+            Tools.ScreenPointToRay2D(eventData.pressEventCamera, eventData.position, delegate(Collider2D col)
+            {
+                Block b = col.GetComponent<Block>();
+                if (b != null)
+                {
+                    //有方块
+                    Debug.Log(b);
+                    Destroy(gameObject);//删除拖拽的英雄图标
+                    //创建英雄物体
+                    GameApp.FightManager.AddHero(b,data);
+                }
+                    
+            });
         }
 
         //拖拽中

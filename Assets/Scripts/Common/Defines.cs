@@ -21,5 +21,8 @@ namespace Common
         //全局事件相关
         public static readonly string ShowLevelDesEvent = "ShowLevelDesEvent";//显示关卡详情事件
         public static readonly string HideLevelDesEvent = "HideLevelDesEvent";//隐藏关卡详情事件
+        
+        public static readonly string OnSelectEvent = "OnSelectEvent";//选中事件
+        public static readonly string OnUnSelectEvent = "OnUnSelectEvent";//未选中事件
     }
 }
