@@ -24,6 +24,7 @@ public class GameApp : Singleton<GameApp>
     public static TimerManager TimerManager;//时间计时器
     public static FightWorldManager FightManager;//战斗管理器
     public static MapManager MapManager;//地图管理器
+    public static GameDataManager GameDataManager;//游戏数据管理器
     
     public override void Init()
     {
@@ -36,6 +37,7 @@ public class GameApp : Singleton<GameApp>
         TimerManager = new TimerManager();
         FightManager = new FightWorldManager();
         MapManager = new MapManager();
+        GameDataManager = new GameDataManager();
     }
 
     public override void Update(float dt)
