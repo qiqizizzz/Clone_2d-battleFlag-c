@@ -17,6 +17,9 @@ namespace MVC
         SelectLevelView,
         FightView,
         FightSelectHeroView,
-        DragHeroView
+        DragHeroView,
+        TipView,
+        HeroDesView,
+        EnemyDesView
     }
 }

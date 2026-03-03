@@ -9,13 +9,38 @@
 using System.Collections.Generic;
 using Config;
 using Module.Fight.Components;
+using Module.Fight.FightMgr;
 using MVC.View;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Module.Fight
 {
     public class FightSelectHeroView : BaseView
     {
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            Find<Button>("bottom/startBtn").onClick.AddListener(onFightBtn);
+        }
+
+        //选完英雄开始进入到玩家回合
+        private void onFightBtn()
+        {
+            //如果一个英雄都没选,提示玩家选择(此处省略提示界面)
+            if (GameApp.FightManager.heroes.Count == 0)
+            {
+                Debug.Log("没有选择英雄");
+            }
+            else
+            {
+                GameApp.ViewManager.Close(ViewId);//关闭选英雄界面
+                
+                //切换到玩家回合
+                GameApp.FightManager.ChangeState(GameState.PlayerRound);
+            }
+        }
+
         public override void Open(params object[] args)
         {
             base.Open(args);

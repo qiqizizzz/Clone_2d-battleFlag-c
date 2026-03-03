@@ -15,7 +15,8 @@ namespace Module.Fight.FightMgr
     public enum GameState
     {
         Idle,
-        Enter
+        Enter,
+        PlayerRound
     }
     
     public class FightWorldManager
@@ -68,6 +69,9 @@ namespace Module.Fight.FightMgr
                 case GameState.Enter:
                     _current = new FightEnter();
                     break;
+                case GameState.PlayerRound:
+                    _current = new FightPlayerUnit();
+                    break;
                 
             }
             _current.Init();
@@ -84,7 +88,10 @@ namespace Module.Fight.FightMgr
             Debug.Log("Enemy: " + objs.Length);
             for (int i = 0; i < objs.Length; i++)
             {
-                enemies.Add(objs[i].GetComponent<Enemy>());
+                Enemy enemy = objs[i].GetComponent<Enemy>();
+                //当前位置被敌人占用了,设置方块的类型为障碍物
+                GameApp.MapManager.ChangeBlockType(enemy.RowIndex, enemy.ColIndex, BlockType.Obstacle);
+                enemies.Add(enemy);
             }
         }
         
