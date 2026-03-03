@@ -14,6 +14,8 @@ namespace Module.Fight.FightMgr
         {
             //地图初始化
             GameApp.MapManager.Init();
+            //进入战斗
+            GameApp.FightManager.EnterFight();
         }
     }
 }

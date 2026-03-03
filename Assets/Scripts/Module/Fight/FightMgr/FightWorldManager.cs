@@ -24,7 +24,11 @@ namespace Module.Fight.FightMgr
 
         private FightUnitBase current;//当前所处的战斗单元
 
-        public List<Hero> heros;//战斗中的英雄集合
+        public List<Hero> heroes;//战斗中的英雄集合
+
+        public List<Enemy> enemies;//战斗中的敌人集合
+        
+        public int RoundCount;//当前回合数
 
         public FightUnitBase Current
         {
@@ -33,7 +37,8 @@ namespace Module.Fight.FightMgr
 
         public FightWorldManager()
         {
-            heros = new List<Hero>();
+            heroes = new List<Hero>();
+            enemies = new List<Enemy>();
             ChangeState(GameState.Idle);
         }
         
@@ -67,6 +72,21 @@ namespace Module.Fight.FightMgr
             }
             _current.Init();
         }
+
+        //进入战斗 初始化一些信息(敌人信息 回合数等)
+        public void EnterFight()
+        {
+            RoundCount = 1;
+            heroes = new List<Hero>();
+            enemies = new List<Enemy>();
+            //将场景中的敌人进行存储
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Enemy");
+            Debug.Log("Enemy: " + objs.Length);
+            for (int i = 0; i < objs.Length; i++)
+            {
+                enemies.Add(objs[i].GetComponent<Enemy>());
+            }
+        }
         
         //添加英雄
         public void AddHero(Block b, Dictionary<string, string> data)
@@ -77,7 +97,7 @@ namespace Module.Fight.FightMgr
             hero.Init(data, b.RowIndex, b.ColIndex);
             //这个位置被占领了,设置方块的类型为障碍物 -> 因为英雄占领了这个位置
             b.Type = BlockType.Obstacle;
-            heros.Add(hero);
+            heroes.Add(hero);
         }
     }
 }
