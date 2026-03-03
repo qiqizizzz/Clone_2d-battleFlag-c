@@ -1,0 +1,74 @@
+﻿/*
+* ┌──────────────────────────────────┐
+* │  描    述: 命令管理器                      
+* │  类    名: CommandManager.cs       
+* │  创    建: By qiqizizzz
+* └──────────────────────────────────┘
+*/
+
+using System.Collections.Generic;
+
+namespace Module.Fight.Command
+{
+    public class CommandManager
+    {
+        private Queue<BaseCommand> willDoCommandQueue;//待执行命令队列
+        private Stack<BaseCommand> unDoStack;//撤销的命令 栈
+        private BaseCommand current;//当前所执行的命令
+
+        public CommandManager()
+        {
+            willDoCommandQueue = new Queue<BaseCommand>();
+            unDoStack = new Stack<BaseCommand>();
+        }
+
+        //是否在执行命令中
+        public bool IsRunningCommand
+        {
+            get { return current != null; }
+        }
+        
+        //添加命令
+        public void AddCommand(BaseCommand cmd)
+        {
+            willDoCommandQueue.Enqueue(cmd);//添加到命令队列
+            unDoStack.Push(cmd);//添加到撤销栈
+        }
+        
+        //每帧执行
+        public void Update(float dt)
+        {
+            if (current == null)
+            {
+                if (willDoCommandQueue.Count > 0)
+                {
+                    current = willDoCommandQueue.Dequeue();
+                    current.Do();//执行
+                }
+            }
+            else
+            {
+                if (current.Update(dt))
+                {
+                    current = null;
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            willDoCommandQueue.Clear();
+            unDoStack.Clear();
+            current = null;
+        }
+
+        //撤销上一个命令
+        public void UnDo()
+        {
+            if (unDoStack.Count > 0)
+            {
+                unDoStack.Pop().Undo();
+            }
+        }
+    }
+}
