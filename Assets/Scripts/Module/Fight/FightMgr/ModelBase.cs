@@ -65,14 +65,14 @@ namespace Module.Fight.FightMgr
         {
             //执行未选中
             GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
-            //test
-            bodySp.color = Color.red;
+            
+            GameApp.MapManager.ShowStepGrid(this, Step);
         }
         
         //未选中回调
         protected virtual void OnUnSelectCallback(System.Object arg)
         {
-            bodySp.color = Color.white;
+            GameApp.MapManager.HideStepGrid(this, Step);
         }
     }
 }

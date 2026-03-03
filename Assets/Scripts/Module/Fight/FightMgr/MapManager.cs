@@ -7,6 +7,7 @@
 */
 
 using System.Collections.Generic;
+using Common;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -56,6 +57,32 @@ namespace Module.Fight.FightMgr
                 mapArr[row, col] = b;
             }
 
+        }
+        
+        public BlockType GetBlockType(int row, int col) => mapArr[row, col].Type;
+
+        //显示移动的区域
+        public void ShowStepGrid(ModelBase model, int step)
+        {
+            _BFS bfs = new _BFS(RowCount, ColCount);
+            List<_BFS.Point> points = bfs.Search(model.RowIndex, model.ColIndex, step);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                mapArr[points[i].RowIndex, points[i].ColIndex].ShowGrid(Color.blue);
+            }
+        }
+
+        //隐藏移动的区域
+        public void HideStepGrid(ModelBase model, int step)
+        {
+            _BFS bfs = new _BFS(RowCount, ColCount);
+            List<_BFS.Point> points = bfs.Search(model.RowIndex, model.ColIndex, step);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                mapArr[points[i].RowIndex, points[i].ColIndex].HideGrid();
+            }
         }
     }
 }
