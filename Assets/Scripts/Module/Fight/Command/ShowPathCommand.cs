@@ -22,7 +22,6 @@ namespace Module.Fight.Command
         private AStarPoint end;//终点
         private List<AStarPoint> prePaths;//之前检测到的路径集合 用来清空用
         
-        
         public ShowPathCommand(ModelBase model) : base(model)
         {
             prePaths = new List<AStarPoint>();
@@ -35,7 +34,14 @@ namespace Module.Fight.Command
             //点击鼠标后 确定移动的位置
             if (Input.GetMouseButtonDown(0))
             {
-                GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);//执行未选中
+                if (prePaths.Count != 0 && this.model.Step >= prePaths.Count - 1) //之前已经有路径了 并且行动力足够 进行移动
+                {
+                    GameApp.CommandManager.AddCommand(new MoveCommand(this.model, prePaths));//移动
+                }
+                else
+                {
+                    GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+                }
                 
                 return true;
             }
@@ -100,11 +106,8 @@ namespace Module.Fight.Command
 
                     GameApp.MapManager.SetBlockDir(paths[i].RowIndex, paths[i].ColIndex, dir, Color.yellow);
                 }
-                prePaths = paths;
             }
-
-            
-
+            prePaths = paths;
         }
     }
 }

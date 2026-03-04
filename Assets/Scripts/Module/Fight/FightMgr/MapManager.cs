@@ -84,6 +84,9 @@ namespace Module.Fight.FightMgr
             }
 
         }
+
+        //获取格子位置
+        public Vector3 GetBlockPos(int row, int col) => mapArr[row, col].transform.position;
         
         public BlockType GetBlockType(int row, int col) => mapArr[row, col].Type;
 
