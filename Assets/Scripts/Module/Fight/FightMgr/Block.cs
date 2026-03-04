@@ -35,12 +35,14 @@ namespace Module.Fight.FightMgr
             gridSp = transform.Find("grid").GetComponent<SpriteRenderer>();
             dirSp = transform.Find("dir").GetComponent<SpriteRenderer>();
 
-            GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnSelectCallback);
+            GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, onSelectCallback);
+            GameApp.MsgCenter.AddEvent(Defines.OnUnSelectEvent, onUnSelectCallback);
         }
 
         protected void OnDestroy()
         {
-            GameApp.MsgCenter.RemoveEvent(gameObject, Defines.OnSelectEvent, OnSelectCallback);
+            GameApp.MsgCenter.RemoveEvent(gameObject, Defines.OnSelectEvent, onSelectCallback);
+            GameApp.MsgCenter.RemoveEvent(Defines.OnUnSelectEvent, onUnSelectCallback);
         }
 
         //显示格子
@@ -56,9 +58,15 @@ namespace Module.Fight.FightMgr
             gridSp.enabled = false;
         }
         
-        private void OnSelectCallback(System.Object arg)
+        private void onSelectCallback(System.Object arg)
         {
             GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+        }
+        
+        //未选中
+        private void onUnSelectCallback(System.Object arg)
+        {
+            dirSp.sprite = null;
         }
         
         private void OnMouseEnter()
@@ -69,6 +77,13 @@ namespace Module.Fight.FightMgr
         private void OnMouseExit()
         {
             selectSp.enabled = false;
+        }
+
+        //设置箭头方向的图片资源与颜色
+        public void SetDirSp(Sprite sp, Color color)
+        {
+            dirSp.sprite = sp;
+            dirSp.color = color;
         }
     }
 }

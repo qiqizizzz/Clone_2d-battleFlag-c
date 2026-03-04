@@ -7,6 +7,7 @@
 */
 
 using System.Collections.Generic;
+using Module.Fight.Command;
 using MVC;
 
 namespace Module.Fight.FightMgr
@@ -29,8 +30,22 @@ namespace Module.Fight.FightMgr
         //选中
         protected override void OnSelectCallback(object arg)
         {
-            base.OnSelectCallback(arg);
-            GameApp.ViewManager.Open(ViewType.HeroDesView, this);
+            //玩家回合才能选择角色
+            if (GameApp.FightManager.state == GameState.PlayerRound)
+            {
+                //若已经停止行动了则停止操作
+                if(IsStop) return;
+                
+                //若正在执行命令则停止操作
+                if(GameApp.CommandManager.IsRunningCommand) return;
+                
+                //添加显示路径命令
+                GameApp.CommandManager.AddCommand(new ShowPathCommand(this));
+                
+                base.OnSelectCallback(arg);
+                GameApp.ViewManager.Open(ViewType.HeroDesView, this);
+            }
+            
         }
 
         //未选中
