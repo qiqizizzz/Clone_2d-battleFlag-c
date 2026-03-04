@@ -17,6 +17,8 @@ namespace Module.Fight
     {
         public FightController() : base()
         {
+            SetModel(new FightModel(this));//设置战斗模型数据
+            
             GameApp.ViewManager.Register(ViewType.FightView, new ViewInfo()
             {
                 PrefabName = "FightView",
@@ -60,6 +62,11 @@ namespace Module.Fight
             });
             
             InitModuleEvent();
+        }
+
+        public override void Init()
+        {
+            model.Init();
         }
 
         public override void InitModuleEvent()
