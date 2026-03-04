@@ -108,8 +108,8 @@ namespace Common
         {
             this.start = start;
             this.end = end;
-            open = new List<AStarPoint>();
-            close = new Dictionary<string, AStarPoint>();
+            open.Clear();
+            close.Clear();
             
             //1.将起点加入到open表
             open.Add(start);
