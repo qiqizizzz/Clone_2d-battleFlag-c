@@ -24,5 +24,11 @@ namespace Common
         
         public static readonly string OnSelectEvent = "OnSelectEvent";//选中事件
         public static readonly string OnUnSelectEvent = "OnUnSelectEvent";//未选中事件
+        
+        //option
+        public static readonly string OnAttackEvent = "OnAttackEvent";//攻击事件
+        public static readonly string OnIdleEvent = "OnIdleEvent";//待机事件
+        public static readonly string OnCancelEvent = "OnCancelEvent";//取消事件
+        public static readonly string OnRemoveHeroToSceneEvent = "OnRemoveHeroToSceneEvent";//移除英雄到场景事件
     }
 }

@@ -127,7 +127,7 @@ namespace Common
         {
             if (tempMsgDic.ContainsKey(eventName))
             {
-                tempMsgDic[eventName] += callback;
+                tempMsgDic[eventName] = callback;//添加的临时事件 是要覆盖的而不是累加
             }
             else
             {

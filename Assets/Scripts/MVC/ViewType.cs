@@ -20,6 +20,7 @@ namespace MVC
         DragHeroView,
         TipView,
         HeroDesView,
-        EnemyDesView
+        EnemyDesView,
+        SelectOptionView,
     }
 }

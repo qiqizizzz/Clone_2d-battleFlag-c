@@ -23,7 +23,7 @@ namespace Module.Fight
     
     public class FightModel : BaseModel
     {
-        private List<OptionData> options;
+        public List<OptionData> options;
         public ConfigData optionConfig;
 
         public FightModel(BaseController ctl) : base(ctl)

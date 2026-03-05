@@ -54,7 +54,7 @@ namespace MVC.View
             
         }
 
-        public void InitData()
+        public virtual void InitData()
         {
             _isInit = true;
         }
