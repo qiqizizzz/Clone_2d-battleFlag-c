@@ -9,13 +9,16 @@
 using System.Collections.Generic;
 using Common;
 using Module.Fight.Command;
+using Module.Fight.Skill;
 using MVC;
 using UnityEngine;
 
 namespace Module.Fight.FightMgr
 {
-    public class Hero : ModelBase
+    public class Hero : ModelBase, ISkill
     {
+        public SkillProperty skillPro { get; set; }
+        
         public void Init(Dictionary<string,string> data, int row, int col)
         {
             this.data = data;
@@ -27,8 +30,21 @@ namespace Module.Fight.FightMgr
             Step = int.Parse(this.data["Step"]);
             MaxHp = int.Parse(this.data["Hp"]);
             CurHp = MaxHp;
+            skillPro = new SkillProperty(int.Parse(this.data["Skill"]));
         }
 
+        //显示技能区域
+        public void ShowSkillArea()
+        {
+            GameApp.MapManager.ShowAttackStep(this, skillPro.AttackRange, Color.red);
+        }
+
+        //隐藏技能攻击区域
+        public void HideSkillArea()
+        {
+            GameApp.MapManager.HideAttackStep(this, skillPro.AttackCount);
+        }
+        
         //选中
         protected override void OnSelectCallback(object arg)
         {
@@ -63,7 +79,7 @@ namespace Module.Fight.FightMgr
         //攻击
         private void onAttackCallback(System.Object arg)
         {
-            Debug.Log("攻击事件");
+            GameApp.CommandManager.AddCommand(new ShowSkillAreaCommand(this));
         }
         
         //待机
