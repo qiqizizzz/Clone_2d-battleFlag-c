@@ -83,7 +83,7 @@ namespace Sound
 
             if (clips.ContainsKey(name) == false)
             {
-                AudioClip clip = Resources.Load<AudioClip>($"Sound/{name}");
+                AudioClip clip = Resources.Load<AudioClip>($"Sounds/{name}");
                 clips.Add(name, clip);
             }
 
