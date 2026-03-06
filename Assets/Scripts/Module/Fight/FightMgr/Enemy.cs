@@ -34,7 +34,8 @@ namespace Module.Fight.FightMgr
         //选中
         protected override void OnSelectCallback(object arg)
         {
-            Debug.Log($"[Enemy] OnSelectCallback - Id={Id}");
+            if(GameApp.CommandManager.IsRunningCommand) return;
+            
             base.OnSelectCallback(arg);
             GameApp.ViewManager.Open(ViewType.EnemyDesView, this);
         }

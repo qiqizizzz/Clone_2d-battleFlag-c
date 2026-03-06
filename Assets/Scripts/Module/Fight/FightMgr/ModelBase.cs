@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using Common;
+using Module.Fight.Skill;
 using UnityEngine;
 
 namespace Module.Fight.FightMgr
@@ -136,6 +137,42 @@ namespace Module.Fight.FightMgr
         public void PlayAni(string aniName)
         {
             anim.Play(aniName);
+        }
+
+        //受伤
+        public virtual void GetHit(ISkill skill)
+        {
+            
+        }
+
+        //播放特效(特效物品)
+        public virtual void PlayEffect(string name)
+        {
+            GameObject obj = Instantiate(Resources.Load($"Effect/{name}")) as GameObject;
+            obj.transform.position = transform.position;
+        }
+
+        //计算两个model的距离(根据行列下标计算)
+        public float GetDis(ModelBase model) =>
+            Mathf.Abs(RowIndex - model.RowIndex) + Mathf.Abs(ColIndex - model.ColIndex);
+        
+        //播放音效(攻击 受伤等)
+        public void PlaySound(string name)
+        {
+            GameApp.SoundManager.PlayEffect(name, transform.position);
+        }
+        
+        //看向某个model
+        public void LookAtModel(ModelBase model)
+        {
+            if ((model.transform.position.x > transform.position.x) && transform.localScale.x < 0)
+            {
+                Flip();
+            }
+            else if ((model.transform.position.x < transform.position.x) && transform.localScale.x > 0)
+            {
+                Flip();
+            }
         }
     }
 }

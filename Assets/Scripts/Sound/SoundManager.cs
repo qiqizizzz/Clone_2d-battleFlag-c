@@ -75,5 +75,19 @@ namespace Sound
             bgmSource.clip = clips[res];
             bgmSource.Play();
         }
+        
+        //播放音效
+        public void PlayEffect(string name, Vector3 pos)
+        {
+            if(IsStop) return;
+
+            if (clips.ContainsKey(name) == false)
+            {
+                AudioClip clip = Resources.Load<AudioClip>($"Sound/{name}");
+                clips.Add(name, clip);
+            }
+
+            AudioSource.PlayClipAtPoint(clips[name], pos);//在指定位置播放音效
+        }
     }
 }
