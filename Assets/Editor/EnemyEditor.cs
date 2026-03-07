@@ -40,11 +40,18 @@ namespace Editor
 
                 Enemy enemy = target as Enemy;
 
+                // 1. 注册撤销操作，并告诉 Unity 对象将要改变
+                Undo.RecordObject(enemy, "Set Enemy Grid Pos");
+                Undo.RecordObject(enemy.transform, "Set Enemy World Pos");
+                
                 Vector3Int cellPos = tilemap.WorldToCell(enemy.transform.position);
                 enemy.RowIndex = Mathf.Abs(min_y - cellPos.y);
                 enemy.ColIndex = Mathf.Abs(min_x - cellPos.x);
 
                 enemy.transform.position = tilemap.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, -1);
+                
+                // 2. 强制标记为已修改
+                EditorUtility.SetDirty(enemy);
             }
         }
     }
