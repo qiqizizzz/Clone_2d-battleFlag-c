@@ -15,6 +15,11 @@ namespace Module.Fight.Command
         public ModelBase model;//命令对象
         protected bool isFinish;//是否做完标记
 
+        public BaseCommand()
+        {
+            
+        }
+
         public BaseCommand(ModelBase model)
         {
             this.model = model;

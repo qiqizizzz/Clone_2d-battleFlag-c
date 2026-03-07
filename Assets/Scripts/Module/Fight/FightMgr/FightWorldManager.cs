@@ -16,7 +16,8 @@ namespace Module.Fight.FightMgr
     {
         Idle,
         Enter,
-        PlayerRound
+        PlayerRound,
+        EnemyRound
     }
     
     public class FightWorldManager
@@ -72,7 +73,9 @@ namespace Module.Fight.FightMgr
                 case GameState.PlayerRound:
                     _current = new FightPlayerUnit();
                     break;
-                
+                case GameState.EnemyRound:
+                    _current = new FightEnemyUnit();
+                    break;
             }
             _current.Init();
         }
@@ -111,6 +114,24 @@ namespace Module.Fight.FightMgr
         public void RemoveEnemy(Enemy enemy)
         {
             enemies.Remove(enemy);
+        }
+
+        //重置英雄行动
+        public void ResetHeroes()
+        {
+            for (int i = 0; i < heroes.Count; i++)
+            {
+                heroes[i].IsStop = false;
+            }
+        }
+
+        //重置敌人行动
+        public void ResetEnemies()
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].IsStop = false;
+            }
         }
     }
 }

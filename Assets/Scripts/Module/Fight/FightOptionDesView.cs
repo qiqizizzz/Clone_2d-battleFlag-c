@@ -6,6 +6,7 @@
 * └──────────────────────────────────┘
 */
 
+using Module.Fight.FightMgr;
 using MVC;
 using MVC.View;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ namespace Module.Fight
         private void onChangeEnemyTurnBtn()
         {
             GameApp.ViewManager.Close((int)ViewType.FightOptionDesView);
+            GameApp.FightManager.ChangeState(GameState.EnemyRound);//切换到敌人回合
         }
 
         //取消
