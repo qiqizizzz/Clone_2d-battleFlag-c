@@ -48,7 +48,6 @@ namespace Module.Fight.Components
                 if (b != null)
                 {
                     //有方块
-                    Debug.Log(b);
                     Destroy(gameObject);//删除拖拽的英雄图标
                     //创建英雄物体
                     GameApp.FightManager.AddHero(b,data);

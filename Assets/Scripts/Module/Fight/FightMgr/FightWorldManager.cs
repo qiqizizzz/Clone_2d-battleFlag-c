@@ -88,7 +88,6 @@ namespace Module.Fight.FightMgr
             enemies = new List<Enemy>();
             //将场景中的敌人进行存储
             GameObject[] objs = GameObject.FindGameObjectsWithTag("Enemy");
-            Debug.Log("Enemy: " + objs.Length);
             for (int i = 0; i < objs.Length; i++)
             {
                 Enemy enemy = objs[i].GetComponent<Enemy>();
@@ -109,11 +108,19 @@ namespace Module.Fight.FightMgr
             b.Type = BlockType.Obstacle;
             heroes.Add(hero);
         }
+
+        //移除英雄
+        public void RemoveHero(Hero hero)
+        {
+            heroes.Remove(hero);
+            GameApp.MapManager.ChangeBlockType(hero.RowIndex, hero.ColIndex, BlockType.Null);
+        }
         
         //移除敌人
         public void RemoveEnemy(Enemy enemy)
         {
             enemies.Remove(enemy);
+            GameApp.MapManager.ChangeBlockType(enemy.RowIndex, enemy.ColIndex, BlockType.Null);
         }
 
         //重置英雄行动
