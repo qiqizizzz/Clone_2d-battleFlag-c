@@ -223,5 +223,12 @@ namespace Module.Fight.FightMgr
                 }
             }
         }
+
+        //清空
+        public void Clear()
+        {
+            mapArr = null;
+            dirSpArr.Clear();
+        }
     }
 }

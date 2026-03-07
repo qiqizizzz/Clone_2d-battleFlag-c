@@ -22,6 +22,8 @@ namespace MVC
         HeroDesView,
         EnemyDesView,
         SelectOptionView,
-        FightOptionDesView
+        FightOptionDesView,
+        WinView,
+        LossView
     }
 }

@@ -17,7 +17,8 @@ namespace Module.Fight.FightMgr
         Idle,
         Enter,
         PlayerRound,
-        EnemyRound
+        EnemyRound,
+        GameOver
     }
     
     public class FightWorldManager
@@ -76,6 +77,9 @@ namespace Module.Fight.FightMgr
                 case GameState.EnemyRound:
                     _current = new FightEnemyUnit();
                     break;
+                case GameState.GameOver:
+                    _current = new FightGameOverUnit();
+                    break;
             }
             _current.Init();
         }
@@ -114,6 +118,9 @@ namespace Module.Fight.FightMgr
         {
             heroes.Remove(hero);
             GameApp.MapManager.ChangeBlockType(hero.RowIndex, hero.ColIndex, BlockType.Null);
+            
+            if (enemies.Count == 0)
+                ChangeState(GameState.GameOver);
         }
         
         //移除敌人
@@ -121,6 +128,9 @@ namespace Module.Fight.FightMgr
         {
             enemies.Remove(enemy);
             GameApp.MapManager.ChangeBlockType(enemy.RowIndex, enemy.ColIndex, BlockType.Null);
+
+            if (enemies.Count == 0)
+                ChangeState(GameState.GameOver);
         }
 
         //重置英雄行动
@@ -163,6 +173,14 @@ namespace Module.Fight.FightMgr
             }
 
             return hero;
+        }
+
+        //卸载资源
+        public void ReLoadRes()
+        {
+            heroes.Clear();
+            enemies.Clear();
+            GameApp.MapManager.Clear();
         }
     }
 }

@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using Common;
 using Module.Fight.FightMgr;
+using MVC;
 using UnityEngine;
 
 namespace Module.Fight.Command
@@ -41,6 +42,11 @@ namespace Module.Fight.Command
                 else
                 {
                     GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+                    
+                    //不移动直接显示操作选项
+                    //显示选项界面
+                    GameApp.ViewManager.Open(ViewType.SelectOptionView, this.model.data["Event"],
+                        (Vector2)this.model.transform.position);
                 }
                 
                 return true;

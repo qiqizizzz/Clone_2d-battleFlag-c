@@ -145,6 +145,14 @@ namespace MVC
             }
         }
 
+        public void CloseAll()
+        {
+            List<IBaseView> list = _opens.Values.ToList();
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                Close(list[i].ViewId);
+            }
+        }
         
         //打开某个视图面板
         public void Open(int key, params object[] args)
