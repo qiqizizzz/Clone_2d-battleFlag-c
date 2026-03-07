@@ -8,6 +8,7 @@
 
 using System;
 using Common;
+using MVC;
 using UnityEngine;
 
 namespace Module.Fight.FightMgr
@@ -61,12 +62,15 @@ namespace Module.Fight.FightMgr
         private void onSelectCallback(System.Object arg)
         {
             GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+            if (GameApp.CommandManager.IsRunningCommand == false)
+                GameApp.ViewManager.Open(ViewType.FightOptionDesView);
         }
         
         //未选中
         private void onUnSelectCallback(System.Object arg)
         {
             dirSp.sprite = null;
+            GameApp.ViewManager.Close((int)ViewType.FightOptionDesView);
         }
         
         private void OnMouseEnter()
