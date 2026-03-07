@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using MVC.Controller;
 using MVC.View;
 using UnityEngine;
@@ -217,6 +218,18 @@ namespace MVC
             return AppDomain.CurrentDomain.GetAssemblies() //获取当前应用程序域中所有已加载的程序集
                 .SelectMany(assembly => assembly.GetTypes()) //将获取的所有类型扁平化为一个序列
                 .FirstOrDefault(type => type.Name == typeName); //寻找匹配名称的第一个类型脚本
+        }
+
+        //显示伤害数字
+        public void ShowHitNum(string num, Color color, Vector3 pos)
+        {
+            GameObject obj = UnityEngine.Object.Instantiate(Resources.Load("View/HitNum"), worldCanvasTf) as GameObject;
+            obj.transform.position = pos;
+            obj.transform.DOMove(pos + Vector3.up * 1.75f, 0.65f).SetEase(Ease.OutBack);
+            UnityEngine.Object.Destroy(obj, 0.75f);
+            Text hitText = obj.GetComponent<Text>();
+            hitText.text = num;
+            hitText.color = color;
         }
     }
 

@@ -106,5 +106,11 @@ namespace Module.Fight.FightMgr
             b.Type = BlockType.Obstacle;
             heroes.Add(hero);
         }
+        
+        //移除敌人
+        public void RemoveEnemy(Enemy enemy)
+        {
+            enemies.Remove(enemy);
+        }
     }
 }
