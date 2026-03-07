@@ -133,5 +133,29 @@ namespace Module.Fight.FightMgr
                 enemies[i].IsStop = false;
             }
         }
+
+        /// <summary>
+        /// 获得离目标最近的英雄
+        /// </summary>
+        /// <param name="model">目标</param>
+        /// <returns></returns>
+        public ModelBase GetMinDisHero(ModelBase model)
+        {
+            if (heroes.Count == 0) return null;
+
+            Hero hero = heroes[0];
+            float min_dis = hero.GetDis(model);
+            for (int i = 1; i < heroes.Count; i++)
+            {
+                float dis = hero.GetDis(heroes[i]);
+                if (dis < min_dis)
+                {
+                    min_dis = dis;
+                    hero = heroes[i];
+                }
+            }
+
+            return hero;
+        }
     }
 }

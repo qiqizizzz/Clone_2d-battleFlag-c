@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Module.Fight.FightMgr;
+using UnityEngine;
 
 namespace Common
 {
@@ -80,7 +81,7 @@ namespace Common
 
                 if (temps.Count == 0)
                 {
-                    //临时集合一个点都找不到 相当于思路了,没必要继续搜索了
+                    //临时集合一个点都找不到 相当于死路了,没必要继续搜索了
                     break;
                 }
                 
@@ -134,6 +135,40 @@ namespace Common
                 finds.Add($"{row}_{col}", p);
                 //添加到临时集合中 用于下次继续查找
                 temp.Add(p);
+            }
+        }
+
+        //寻找可移动的点 离终点最近的点的路径集合
+        public List<Point> FindMinPath(ModelBase model, int step, int endRowIndex, int endColIndex)
+        {
+            List<Point> results = Search(model.RowIndex, model.ColIndex, step);//获得能移动的点的集合
+            if (results.Count == 0) return null;
+            else
+            {
+                Point minPoint = results[0];//默认第一个点离终点最近
+                int minDis = Mathf.Abs(minPoint.RowIndex - endRowIndex) + Mathf.Abs(minPoint.ColIndex - endColIndex);
+                for (int i = 0; i < results.Count; i++)
+                {
+                    int temp_dis = Mathf.Abs(results[i].ColIndex - endColIndex) + Mathf.Abs(results[i].RowIndex - endRowIndex);
+                    if (temp_dis < minDis)
+                    {
+                        minDis = temp_dis;
+                        minPoint = results[i];
+                    }
+                }
+
+                //从离终点最近的点开始往回找父节点 直到找到开始点为止 就是路径了
+                List<Point> paths = new List<Point>();
+                Point current = minPoint.Father;
+                paths.Add(minPoint);
+                while (current != null)
+                {
+                    paths.Add(current);
+                    current = current.Father;
+                }
+
+                paths.Reverse();//反置
+                return paths;
             }
         }
     }
