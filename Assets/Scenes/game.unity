@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f5c3b901ea4c4384735b95f742e79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseTxt: {fileID: 2800000, guid: 54db11ee83df36f42b083c5955e7c9e3, type: 3}
+  mouseTxt: {fileID: 2800000, guid: 7ce0c6e0300071e4983e67266840f465, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
